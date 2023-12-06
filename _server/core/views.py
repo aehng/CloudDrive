@@ -5,6 +5,8 @@ import os
 from django.contrib.auth.decorators import login_required
 from core.models import Folder
 from django.forms import model_to_dict
+from django.http import JsonResponse
+
 
 # Load manifest when server launches
 MANIFEST = {}
@@ -25,26 +27,15 @@ def index(req):
     return render(req, "core/index.html", context)
 
 @login_required
-def create_folder(req):
-    body = json.loads(req.body)
-    note = Note(
-        title=body["title"],
-        content=body["content"],
-        user=req.user
-    )
-    note.save()
-    return JsonResponse({ "note": model_to_dict(note) })
-
-@login_required
 def folders(req):
     if req.method == "POST":
         body = json.loads(req.body)
-        note = Note(
+        folder = Folder(
             title=body["title"],
-            content=body["content"],
             user=req.user
         )
-        note.save()
-        return JsonResponse({ "note": model_to_dict(note) })
+        print("This should be saved!")
+        folder.save()
+        return JsonResponse({ "folder": model_to_dict(folder) })
     else:
         return JsonResponse({ "folders": model_to_dict(req.user.folders) })
