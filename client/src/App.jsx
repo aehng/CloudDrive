@@ -2,6 +2,8 @@ import { useState } from 'react'
 import logo from './assets/Logo.png'
 import './App.css'
 import { makeRequest } from './utils/make_request'
+import FileUploadForm from './UploadForm'
+import FileDownloadForm from './DownloadForm'
 
 function App() {
   const [title, setTitle] = useState("")
@@ -26,9 +28,7 @@ function App() {
   async function postFolder(e) {
     console.log(title)
     const res = await makeRequest("/folders/", "post", {title})
-    if (res) {
-      console.log(res)
-    }
+    
   }
 
   return (
@@ -48,6 +48,8 @@ function App() {
       <div>
         <button onClick={() => postFolder()}>Post</button>
       </div>
+      <FileUploadForm/>
+      <FileDownloadForm/>
     </>
   )
 }
