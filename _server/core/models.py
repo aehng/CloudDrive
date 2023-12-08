@@ -9,6 +9,6 @@ class Folder(models.Model):
 
 class File(models.Model):
     file = models.FileField(upload_to='uploads/')
-    folder = models.ForeignKey(Folder, on_delete=models.CASCADE, null=True, blank=True)
+    folder = models.ForeignKey(Folder, on_delete=models.CASCADE, null=True, blank=True, related_name="files")
     file_name = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="files")

@@ -17,13 +17,6 @@ function App() {
     id = 0
   }
 
-
-  async function logout() {
-    const res = await fetch("/registration/logout/", {
-      credentials: "same-origin", // include cookies!
-    });
-  }
-
   async function postFolder(e) {
     await makeRequest("/folders/", "post", { title }).then(response => {
       setTitle('')
@@ -33,14 +26,6 @@ function App() {
 
   return (
     <>
-      <nav className="navbar bg-body-tertiary">
-        <a href="/" target="_blank">
-          <img src={logo} className="logo" alt="Cloud Drive logo" />
-        </a>
-        <div className="flex-center">
-          <button onClick={logout}>Logout</button>
-        </div>
-      </nav>
       <div className='page'>
         <div className='folders-section'>
           <Folders button={button} />
@@ -51,7 +36,7 @@ function App() {
         </div>
         <div className='content'>
           <Files folder_id={id} />
-          <FileUploadForm />
+          <FileUploadForm folder_id={id} />
         </div>
       </div>
     </>

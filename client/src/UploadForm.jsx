@@ -3,7 +3,10 @@ import cookie from "cookie";
 
 // Most of this code was made with help from ChatGPT
 
-const FileUploadForm = () => {
+function FileUploadForm(props) {
+    const {
+        folder_id
+      } = props;
     const parsedCookie = cookie.parse(document.cookie)
 
 
@@ -21,7 +24,7 @@ const FileUploadForm = () => {
         formData.append('file', file);
 
         try {
-            const response = await fetch('api/upload/', {
+            const response = await fetch(`api/upload/${folder_id}/`, {
                 method: 'POST',
                 body: formData,
                 headers: {

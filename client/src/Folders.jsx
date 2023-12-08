@@ -1,5 +1,6 @@
 import { makeRequest } from './utils/make_request'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Folders(props) {
     const {
@@ -19,7 +20,7 @@ function Folders(props) {
         getFolders().then(response => {
             const folders = response.folders;
             const updatedFolders = folders.map((folder, index) => (
-                <a href={`folder/${folder.id}/`} key={index} className="folder">{folder.title}</a>
+                <Link to={`/folder/${folder.id}/`} key={index} className="folder">{folder.title}</Link>
             ));
             setOld(updatedFolders);
         });

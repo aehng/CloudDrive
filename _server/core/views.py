@@ -48,9 +48,10 @@ def folders(req):
 
 @login_required
 def files(req, id):
-    if id:
-        files = Folder.objects.get(id).get("files")
-    else:
+    try:
+        folder = Folder.objects.get(id=id)
+        files = folder.files.all()
+    except:
         files = File.objects.filter(user=req.user)
     file_dicts = [{"name": file.file_name, "id": file.id} for file in files]
     return JsonResponse({ "files": file_dicts })
@@ -58,7 +59,7 @@ def files(req, id):
 
 # Most of this code was made with help from ChatGPT
 @api_view(['POST'])
-def file_upload(req):
+def file_upload(req, folder_id):
     file = req.FILES.get('file')
 
     if not req.user:
@@ -66,12 +67,17 @@ def file_upload(req):
     
     if not file:
         return Response({'error': 'Please attach a file'}, status=400)
+    
+    folder = None
+    if folder_id:
+        folder = Folder.objects.get(id=folder_id)
 
     # Save the file to the model 
     file = File(
         file = file,
         user = req.user,
         file_name = file.name,
+        folder = folder
         )
     file.save()
 

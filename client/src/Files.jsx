@@ -19,14 +19,15 @@ function Files(props) {
         // I got some AI help here too... mostly just parsing the object
         getFiles().then(response => {
             const files = response.files;
-            console.log(files)
-            const updatedfiles = files.map((file, index) => (
-                <div className="file" key={index}>
-                    {file['name']}
-                    <FileDownloadForm file_id={file['id']} />
-                </div>
-            ));
-            setOld(updatedfiles);
+            if (files){
+                const updatedfiles = files.map((file, index) => (
+                    <div className="file" key={index}>
+                        {file['name']}
+                        <FileDownloadForm file_id={file['id']} />
+                    </div>
+                ));
+                setOld(updatedfiles);
+            }
         });
     }, [folder_id]);
 
