@@ -47,8 +47,13 @@ def folders(req):
     
 
 @login_required
-def display_folder(req, id):
-    return Response()
+def files(req, id):
+    if id:
+        files = Folder.objects.get(id).get("files")
+    else:
+        files = File.objects.filter(user=req.user)
+    file_dicts = [{"name": file.file_name, "id": file.id} for file in files]
+    return JsonResponse({ "files": file_dicts })
 
 
 # Most of this code was made with help from ChatGPT
@@ -64,8 +69,9 @@ def file_upload(req):
 
     # Save the file to the model 
     file = File(
-        file=file,
-        user= req.user
+        file = file,
+        user = req.user,
+        file_name = file.name,
         )
     file.save()
 

@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 
 // Most of this code was made with help from ChatGPT
 
-const FileDownloadForm = () => {
-  const [fileId, setFileId] = useState('');
+function FileDownloadForm(props) {
+  const {
+    file_id
+  } = props;
 
-  const handleFileIdChange = (e) => {
-    setFileId(e.target.value);
-  };
 
   const handleDownload = async (e) => {
     e.preventDefault();
   
     try {
-      const response = await fetch(`api/download/${fileId}/`);
+      const response = await fetch(`api/download/${file_id}/`);
   
       if (response.ok) {
         const contentDisposition = response.headers.get('Content-Disposition');
@@ -39,7 +38,6 @@ const FileDownloadForm = () => {
 
   return (
     <form onSubmit={handleDownload}>
-      <input type="number" placeholder="Enter file ID" value={fileId} onChange={handleFileIdChange} />
       <button type="submit">Download File</button>
     </form>
   );

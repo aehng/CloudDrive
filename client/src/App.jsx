@@ -5,28 +5,25 @@ import { makeRequest } from './utils/make_request'
 import FileUploadForm from './UploadForm'
 import FileDownloadForm from './DownloadForm'
 import Folders from './Folders'
+import Files from './Files'
+import { useParams } from 'react-router-dom';
 
 function App() {
   const [title, setTitle] = useState("")
   const [button, setButton] = useState("")
+
+  let { id } = useParams();
+  if (!id){
+    id = 0
+  }
+
 
   async function logout() {
     const res = await fetch("/registration/logout/", {
       credentials: "same-origin", // include cookies!
     });
   }
-  async function get_folders() {
-    const res = await fetch("/folders/", {
-      credentials: "same-origin", // include cookies!
-    });
 
-    if (res.ok) {
-      // navigate away from the single page app!
-      window.location = "/registration/sign_in/";
-    } else {
-      // handle logout failed!
-    }
-  }
   async function postFolder(e) {
     await makeRequest("/folders/", "post", { title }).then(response => {
       setTitle('')
@@ -53,8 +50,8 @@ function App() {
           </div>
         </div>
         <div className='content'>
+          <Files folder_id={id} />
           <FileUploadForm />
-          <FileDownloadForm />
         </div>
       </div>
     </>

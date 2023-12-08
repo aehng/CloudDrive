@@ -9,6 +9,10 @@ const router = createHashRouter([
   {
     path: "/",
     element: <App />
+  },
+  {
+    path: "/folder/:id/",
+    element: <App />
   }
 ])
 

@@ -19,7 +19,7 @@ function Folders(props) {
         getFolders().then(response => {
             const folders = response.folders;
             const updatedFolders = folders.map((folder, index) => (
-                <div key={index} className="folder">{folder.title}</div>
+                <a href={`folder/${folder.id}/`} key={index} className="folder">{folder.title}</a>
             ));
             setOld(updatedFolders);
         });
