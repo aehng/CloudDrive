@@ -38,7 +38,7 @@ function FileDownloadForm(props) {
 
   return (
     <form onSubmit={handleDownload}>
-      <button type="submit">Download File</button>
+      <button className='download' type="submit">Download</button>
     </form>
   );
 };

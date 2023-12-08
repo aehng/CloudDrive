@@ -22,11 +22,13 @@ a:hover {
 }
 
 nav{
+  position: sticky;
   padding: .5em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: rgb(33, 40, 43);
+  align-items: center;
 }
 
 .logo{

@@ -5,7 +5,8 @@ import cookie from "cookie";
 
 function FileUploadForm(props) {
     const {
-        folder_id
+        folder_id,
+        setUpload
       } = props;
     const parsedCookie = cookie.parse(document.cookie)
 
@@ -31,7 +32,7 @@ function FileUploadForm(props) {
                     "X-CSRFToken": parsedCookie.csrftoken // protects against CSRF attacks
                 },
             });
-
+            setUpload(response)
             if (response.ok) {
                 console.log('File uploaded successfully');
             } else {

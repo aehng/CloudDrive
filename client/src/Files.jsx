@@ -4,7 +4,8 @@ import FileDownloadForm from './DownloadForm';
 
 function Files(props) {
     const {
-        folder_id
+        folder_id,
+        upload
     } = props;
 
     const [old, setOld] = useState([]);
@@ -29,7 +30,7 @@ function Files(props) {
                 setOld(updatedfiles);
             }
         });
-    }, [folder_id]);
+    }, [folder_id, upload]);
 
 
     return (

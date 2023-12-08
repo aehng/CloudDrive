@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 function App() {
   const [title, setTitle] = useState("")
   const [button, setButton] = useState("")
+  const [upload, setUpload] = useState("")
 
   let { id } = useParams();
   if (!id){
@@ -26,17 +27,17 @@ function App() {
 
   return (
     <>
-      <div className='page'>
+      <div className='flex'>
         <div className='folders-section'>
           <Folders button={button} />
-          <div>
-          <input className='folder-text' placeholder='Add Folder' type="text" value={title} onChange={e => setTitle(e.target.value)} />
-            <button className='folder-button' onClick={() => postFolder()}>Post</button>
-          </div>
+          <span className='flex'>
+          <input className='folder-text' placeholder='Create Folder' type="text" value={title} onChange={e => setTitle(e.target.value)} />
+            <button className='folder-button' onClick={() => postFolder()}>Create</button>
+          </span>
         </div>
         <div className='content'>
-          <Files folder_id={id} />
-          <FileUploadForm folder_id={id} />
+          <Files folder_id={id} upload={upload} />
+          <FileUploadForm setUpload={setUpload} folder_id={id} />
         </div>
       </div>
     </>

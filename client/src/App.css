@@ -9,13 +9,14 @@
   background-color: rgb(61, 61, 61);
   display: flex;
   flex-direction: column;
+  border-right: 1px grey solid;
 }
 
 .folder{
   padding: 5px 10px;
   border-radius: 15px;
   border: 2px rgb(3, 6, 36) solid;
-  margin: 3px;
+  margin: 3px 5px;
   background-color: rgb(36, 42, 48);
 }
 
@@ -24,22 +25,41 @@
 }
 
 .folder-text{
-  width: 125px;
-  margin: 0;
+  width: 130px;
+  margin: 0 0 0 5px;
   padding: 0 5px;
-  height: 25px;
+  height: 30px;
+  box-sizing: border-box;
   border-radius: 15px 0 0 15px;
 }
 
 .folder-button{
   margin: 0;
-  padding: 5px 10px;
+  padding: 0px 10px;
   border-radius: 0 15px 15px 0;
   border: 2px rgb(3, 6, 36) solid;
-  margin: 3px;
+  margin: 0px;
+  width: 60px;
+  height: 30px;
+  box-sizing: border-box;
+  font-size: 12px;
   background-color: rgb(36, 42, 48);
 }
 
-.page{
+.flex{
   display: flex;
+}
+
+.file{
+  padding: 5px 10px;
+  border-bottom: 1px rgb(32, 32, 32) solid;
+  background-color: rgb(48, 65, 82);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.download{
+  width: 100px;
+  padding: 5px;
 }
