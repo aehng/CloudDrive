@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import cookie from "cookie";
 
+// Most of this code was made with help from ChatGPT
+
 const FileUploadForm = () => {
     const parsedCookie = cookie.parse(document.cookie)
 

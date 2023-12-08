@@ -42,10 +42,12 @@ def folders(req):
         folder.save()
         return JsonResponse({ "folder": model_to_dict(folder) })
     else:
-        return JsonResponse({ "folders": model_to_dict(req.user.folders) })
+        user_folders = Folder.objects.filter(user=req.user)
+        folder_dicts = [model_to_dict(folder) for folder in user_folders]
+        return JsonResponse({ "folders": folder_dicts })
     
 
-
+# Most of this code was made with help from ChatGPT
 @api_view(['POST'])
 def file_upload(req):
     file = req.FILES.get('file')
@@ -61,7 +63,7 @@ def file_upload(req):
 
     return Response({'message': 'File uploaded successfully'})
 
-
+# Most of this code was made with help from ChatGPT
 def file_download(request, file_id):
     file = get_object_or_404(File, id=file_id)
     file_path = file.file.path

@@ -4,6 +4,7 @@ import './App.css'
 import { makeRequest } from './utils/make_request'
 import FileUploadForm from './UploadForm'
 import FileDownloadForm from './DownloadForm'
+import Folders from './Folders'
 
 function App() {
   const [title, setTitle] = useState("")
@@ -50,6 +51,7 @@ function App() {
       </div>
       <FileUploadForm/>
       <FileDownloadForm/>
+      <Folders title={title}/>
     </>
   )
 }
