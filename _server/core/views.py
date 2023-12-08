@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.conf  import settings
 import json
 import os
@@ -38,7 +38,6 @@ def folders(req):
             title=body["title"],
             user=req.user
         )
-        print("This should be saved!")
         folder.save()
         return JsonResponse({ "folder": model_to_dict(folder) })
     else:
@@ -47,12 +46,21 @@ def folders(req):
         return JsonResponse({ "folders": folder_dicts })
     
 
+@login_required
+def display_folder(req, id):
+    return Response()
+
+
 # Most of this code was made with help from ChatGPT
 @api_view(['POST'])
 def file_upload(req):
     file = req.FILES.get('file')
 
-    # Perform any additional validation or processing here
+    if not req.user:
+        return redirect("/sign_in")
+    
+    if not file:
+        return Response({'error': 'Please attach a file'}, status=400)
 
     # Save the file to the model 
     file = File(
@@ -64,6 +72,7 @@ def file_upload(req):
     return Response({'message': 'File uploaded successfully'})
 
 # Most of this code was made with help from ChatGPT
+@login_required
 def file_download(request, file_id):
     file = get_object_or_404(File, id=file_id)
     file_path = file.file.path

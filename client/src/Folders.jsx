@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 function Folders(props) {
     const {
-        title
+        button
     } = props;
 
     const [old, setOld] = useState([]);
@@ -16,21 +16,19 @@ function Folders(props) {
 
     useEffect(() => {
         // I got some AI help here too... mostly just parsing the object
-    getFolders().then(response => {
-        const folders = response.folders;
-        const updatedFolders = folders.map((folder, index) => (
-            <div key={index} className="folder">{folder.title}</div>
-          ));
-          setOld(updatedFolders);
+        getFolders().then(response => {
+            const folders = response.folders;
+            const updatedFolders = folders.map((folder, index) => (
+                <div key={index} className="folder">{folder.title}</div>
+            ));
+            setOld(updatedFolders);
         });
-}, [title]);
+    }, [button]);
 
 
     return (
         <>
-            <div className='folders-section'>
-                {old}
-            </div>
+            {old}
         </>
     )
 }

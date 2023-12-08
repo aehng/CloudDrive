@@ -8,6 +8,7 @@ import Folders from './Folders'
 
 function App() {
   const [title, setTitle] = useState("")
+  const [button, setButton] = useState("")
 
   async function logout() {
     const res = await fetch("/registration/logout/", {
@@ -27,9 +28,10 @@ function App() {
     }
   }
   async function postFolder(e) {
-    console.log(title)
-    const res = await makeRequest("/folders/", "post", {title})
-    
+    await makeRequest("/folders/", "post", { title }).then(response => {
+      setTitle('')
+      setButton(response)
+    })
   }
 
   return (
@@ -42,16 +44,19 @@ function App() {
           <button onClick={logout}>Logout</button>
         </div>
       </nav>
-      <label>
-            Title
-            <input type="text" value={title} onChange={e => setTitle(e.target.value)}/>
-      </label>
-      <div>
-        <button onClick={() => postFolder()}>Post</button>
+      <div className='page'>
+        <div className='folders-section'>
+          <Folders button={button} />
+          <div>
+          <input className='folder-text' placeholder='Add Folder' type="text" value={title} onChange={e => setTitle(e.target.value)} />
+            <button className='folder-button' onClick={() => postFolder()}>Post</button>
+          </div>
+        </div>
+        <div className='content'>
+          <FileUploadForm />
+          <FileDownloadForm />
+        </div>
       </div>
-      <FileUploadForm/>
-      <FileDownloadForm/>
-      <Folders title={title}/>
     </>
   )
 }

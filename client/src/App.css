@@ -1,3 +1,45 @@
 .card {
   padding: 2em;
 }
+
+.folders-section{
+  position: sticky;
+  width: 200px;
+  height: 100vh;
+  background-color: rgb(61, 61, 61);
+  display: flex;
+  flex-direction: column;
+}
+
+.folder{
+  padding: 5px 10px;
+  border-radius: 15px;
+  border: 2px rgb(3, 6, 36) solid;
+  margin: 3px;
+  background-color: rgb(36, 42, 48);
+}
+
+.folder:hover{
+  background-color: rgb(40, 55, 70);
+}
+
+.folder-text{
+  width: 125px;
+  margin: 0;
+  padding: 0 5px;
+  height: 25px;
+  border-radius: 15px 0 0 15px;
+}
+
+.folder-button{
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 0 15px 15px 0;
+  border: 2px rgb(3, 6, 36) solid;
+  margin: 3px;
+  background-color: rgb(36, 42, 48);
+}
+
+.page{
+  display: flex;
+}
