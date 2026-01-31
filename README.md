@@ -1,24 +1,78 @@
-# 2610 Django + Vite Starting Point
-This project serves as a starting point you to use as a starting point for Django applications that use Vite as the asset server for development. You are welcome to us this project for all of your assignments beginning with Module 5.
+# CloudDrive
 
-## Strategy
-This application is a hybrid MPA and SPA. It reuses all of the login stuff that we did at the end of module 3 - there is a separate page for signup/signin. Once a user is logged in they are redirected to the / view which then renders the SPA application created using React and Vite.
+A starter project combining a Django backend and a Vite-powered frontend (React). Use this repository as a starting point to build a cloud-storage-style application (or any hybrid MPA/SPAs) with an API-driven Django server and a modern JavaScript frontend served by Vite during development.
 
-## Creating a new application
-1. Clone the repo `git clone git@github.com:dittonjs/2610DjangoViteStarter.git <your-new-project-name>`. Replace `<your-new-project-name>` with the name you want give to your project.
-2. Open the pyproject.toml file and change the `name` property. You should use `-` to separate words in your name for this property.
-3. This project was set up using Python 3.11. You might have an older version installed. If you run into an error later that says that your activated Python version isn't compatible, the in the pyproject.toml file, just change the version there to match the version that you have installed. If you do this, you need to make sure that the lock file gets regenerated. You can do this by running `poetry lock --no-update` or by simply deleting the poetry.lock file (it will get regenerated when you run poetry install)/
+## Key features
+- Django backend for API, authentication, and server-side pages
+- Vite + React frontend in the `client` directory
+- Clear separation of server (`_server`) and client (`client`) code
+- Uses Poetry for Python dependency management
 
-## Initial Setup
-1. Change the name property in the `pyproject.toml` file to be something unique to your project.
-1. In the root directory, install the python dependencies `poetry install`
-2. In the `client` directory, install the javascript dependencies `npm install`
-3. In the `_server` directory, create a new file called `.env`
-4. Copy the contents of `_server/.env.example` into the newly created `.env` file.
-5. Activate the poetry env `poetry shell`
-6. In the `_server` directory, run the migrations `python manage.py migrate`
+## Repository layout
+- `_server/` — Django project and Python backend
+- `client/` — Vite + React frontend
+- `pyproject.toml` — Python project configuration (Poetry)
+- `poetry.lock` — Locked Python dependencies
 
-## Running the appliction
-1. In the `client` directory run `npm run dev`
-2. In the `_server` directory (with your poetry env activated) run `python manage.py runserver`
-3. Visit your application at `http://localhost:8000`
+## Prerequisites
+- Python 3.11 (or compatible; update `pyproject.toml` if using another Python version)
+- Poetry (for Python dependency management)
+- Node.js (16+ recommended) and npm or yarn
+
+## Initial setup
+1. Clone the repository:
+   git clone https://github.com/aehng/CloudDrive.git
+2. (Optional) Update the project name in `pyproject.toml` if you fork/rename the project.
+3. Install Python dependencies:
+   poetry install
+4. Install frontend dependencies:
+   cd client
+   npm install
+   cd ..
+5. Create environment file for the Django server:
+   - In `_server/` create `.env`
+   - Copy the contents from `_server/.env.example` into `_server/.env` and fill in any required values
+6. Activate the Poetry environment:
+   poetry shell
+7. Run Django migrations:
+   cd _server
+   python manage.py migrate
+
+## Running the application (development)
+- Start the frontend dev server (in a separate terminal):
+  cd client
+  npm run dev
+- Start the Django dev server (with Poetry env active):
+  cd _server
+  python manage.py runserver
+- Open your browser at: http://localhost:8000
+
+The Vite dev server will serve frontend assets and support HMR; Django serves the backend/API and server-side pages.
+
+## Environment variables
+See `_server/.env.example` for the list of environment variables used by the Django app (database settings, secret key, etc.). Make sure to never commit real secret keys to the repository.
+
+## Testing
+If the project contains tests, run them from the `_server` directory. Example (if using pytest or Django test runner):
+- Django test runner:
+  python manage.py test
+
+Add a test runner/configuration as needed.
+
+## Deployment
+This README focuses on local development. For deployment:
+- Build the frontend for production (e.g., `npm run build`) and collect static files in Django.
+- Configure a production-ready database and a secrets store for environment variables.
+- Serve Django with a WSGI/ASGI server (Gunicorn/Uvicorn) behind a reverse proxy.
+
+## Contributing
+Contributions are welcome. Suggested workflow:
+1. Fork the repository
+2. Create a feature branch
+3. Open a pull request with a clear description of changes
+
+## License
+Add a LICENSE file to the repository and update this section with the chosen license (e.g., MIT, Apache-2.0).
+
+## Contact / Support
+If you want, tell me how you'd like the README adjusted (more details on deployment, env variables, CI, or to include examples). I can also open a PR to update the README directly.
