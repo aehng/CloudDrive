@@ -71,8 +71,5 @@ Contributions are welcome. Suggested workflow:
 2. Create a feature branch
 3. Open a pull request with a clear description of changes
 
-## License
-Add a LICENSE file to the repository and update this section with the chosen license (e.g., MIT, Apache-2.0).
-
 ## Contact / Support
 If you want, tell me how you'd like the README adjusted (more details on deployment, env variables, CI, or to include examples). I can also open a PR to update the README directly.
